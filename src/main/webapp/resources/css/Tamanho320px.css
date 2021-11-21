@@ -1,0 +1,31 @@
+/*
+	Proporções Criadas Com Base em 320px de width.
+*/
+
+@media (min-width: 319px) and (max-width: 1023px){		
+	.ObjetosLinhaRecursivo{
+		flex-direction: column;
+	}
+	
+	.TamanhoSelectMIN, .TamanhoSelectPP, .TamanhoSelectP, .TamanhoSelectM, .TamanhoSelectG, .TamanhoSelectGG,
+	.TamanhoSelectXGG{
+		width: 110px !important;
+	}	
+
+	.TamanhoMIN, .TamanhoPP, .TamanhoP, .TamanhoM, .TamanhoG, .TamanhoGG, .TamanhoXGG, .TamanhoMax{
+		width: 100px !important;
+	}
+
+/* Header */
+	.HeaderCabecalho h1{
+		float: none;
+		padding: 0px;
+		text-align: center;
+		width: 320px;
+	}
+	
+	.HeaderCabecalho img {
+		float: none;
+	}
+/* End Header */
+}

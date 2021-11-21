@@ -1,0 +1,465 @@
+/* Ajuste Css PrimeFace */
+	.ui-selectmanycheckbox label, .ui-selectoneradio label{
+		margin-top: 0px !important;
+		margin-right: 10px;
+	}
+/* */
+
+.ObjetosColuna{
+	display: flex;
+	flex-direction: column;
+}
+
+.ObjetosColunaCentral{
+	display: flex;
+	flex-direction: column;
+	
+	float: left;
+ 	position: relative; 
+  	left: var(--centrodaTela);
+}
+
+.ObjetosLinha{
+	display: flex;
+	flex-direction: row;
+}
+
+.ObjetosColuna label, .ObjetosLinha label{
+	display: block;
+}
+
+/* Estilos Botões */
+	.BotaoPrimario{
+		margin-right: 8px ;
+	}
+	
+	.BotaoPrimario:hover{		
+		background-color: var(--corPrincipal);
+		box-shadow: 0px 0px 8px var(--corSecundaria);
+		
+		color: #000;
+		border: 1px solid var(--corPrincipal);
+	}
+	
+	.BotaoPrimario:focus{
+		background-color: var(--corPrincipal);
+		box-shadow: 0px 0px 8px var(--corSecundaria); 
+		outline-color: var(--corPrincipal); 
+		
+		color: #000;
+		border: 1px solid var(--corPrincipal);
+	}
+	
+	.BotaoSecundario{
+		margin-right: 8px;
+		border: 1px !important;
+		background-color: #fff !important;
+		font-weight: bold !important;
+   	 	color: #4f4f4f !important;
+   	 	border-radius: 3px;
+	}
+	
+	.BotaoSecundario:hover{
+		box-shadow: none;
+	}
+	
+	.BotaoSecundario:focus{
+		box-shadow: 0px 0px 8px transparent;
+		outline: none; 
+	}
+/* */
+
+.LinkVerde{
+	text-decoration: none;
+	color: var(--corPrincipal);
+}
+	
+.LinkVerde{
+	text-decoration: underline;
+	color: var(--corSecundariaClara);
+}
+
+.Negrito{
+	font-weight: bolder;
+}
+
+.TextoCaixaAlta{
+	text-transform: uppercase;
+}
+
+.QuebraLinha{
+	word-break: break-word;
+}
+
+.SemQuebraLinha{
+	white-space: nowrap;
+}
+
+.Leitura{
+	background: rgb(235, 235, 235);
+}
+
+/* parte do dataTable cellEditor */
+	/* Editar */
+	.EditPrimefaces span:first-child{
+		height: 20px;
+		width: 20px;
+		background-image: url(../resources/imagens/edit.png);
+		background: round;
+	}
+				
+	/* Confirmar */
+	.EditPrimefaces span:nth-child(2){
+		height: 20px;
+		width: 20px;
+		background-image: url(../resources/imagens/tick.png);
+		background: round;
+	}
+				
+	/* Cancelar */
+	.EditPrimefaces span:last-child{
+		height: 25px;
+		width: 25px;
+		background-image: url(../resources/imagens/close.png);
+		background: round;
+	}
+/* */
+
+.FlutuarDireita{
+	display: flex;
+	float: right;
+}
+
+.Notificacao{
+	font-size: 48px;
+}
+
+.BordaDestaque{
+	border: 1px solid rgb(150, 150, 150);
+}
+
+.TabelaTamanhoDinamico table{
+	table-layout: auto !important;
+}
+
+
+/* parte do dataTable cellEditor */
+	/* Editar */
+	.EditPrimefaces span:first-child{
+		height: 20px;
+		width: 20px;
+		background-image: url(../resources/imagens/edit.png) !important;
+		background: round;
+	}
+				
+	/* Confirmar */
+	.EditPrimefaces span:nth-child(2){
+		height: 20px;
+		width: 20px;
+		background-image: url(../resources/imagens/tick.png) !important;
+		background: round;
+	}
+				
+	/* Cancelar */
+	.EditPrimefaces span:last-child{
+		height: 25px;
+		width: 25px;
+		background-image: url(../resources/imagens/close.png) !important;
+		background: round;
+	}
+/* */
+
+/* Menu */
+	.AjusteMenuPrincipal{
+		width: 20% !important;
+		min-width: 300px;
+	}
+	
+/* 	.AjusteMenuPrincipal li{ */
+/* 		margin-left: 10px; */
+/* 	} */
+	
+	.AjusteMenuPrincipal a:visited, .AjusteMenuPrincipal a{
+		color: black;
+	}
+	
+	.AjusteMenuPrincipal h3{
+		background-color: var(--corLetra);
+	}
+	
+	.AjusteMenuPrincipal h3:active{
+		background-color: var(--corPrincipal);
+	}
+	
+	.AjusteMenuPrincipal h3:hover{
+		box-shadow: 0px 0px 8px var(--corPrincipal);
+	}
+	
+	.AjusteMenuPrincipal li > a:hover{
+		background-color: var(--corLetra);
+		box-shadow: 0px 0px 8px var(--corPrincipal);
+	}
+/* End Menu */
+
+.ObjetosColuna{
+	display: flex;
+	flex-direction: column;
+}
+
+.ObjetosLinha, .ObjetosLinhaRecursivo{
+	display: flex;
+	flex-direction: row;
+}
+
+.ObjetosColuna label, .ObjetosLinha label, .ObjetosLinhaRecursivo label{
+	display: block;
+	padding: 6px 0;
+}
+
+.ObjetosColuna img, .ObjetosLinha img, .ObjetosLinhaRecursivo img{
+	height: 100px;
+	width: 100px;
+}
+
+.ObjetosColuna a, .ObjetosLinha a, .ObjetosLinhaRecursivo a{
+	display: block;
+	color: black;
+	height: 16px;
+	padding: 6px 0;
+	margin-right: 5px;
+}
+
+.ObjetosColuna a:hover, .ObjetosLinha a:hover, .ObjetosLinhaRecursivo a:hover{
+	color: black;
+}
+
+.ObjetosColuna a:visited, .ObjetosLinha a:visited, .ObjetosLinhaRecursivo a:visited{
+	color: black;
+}
+		
+/* Tamanhos */
+	/*
+		A Diferença Entre Tamanho e TamanhoSelect é que Para Ajustar o Tamanho
+		dos Inputs Normais com os Selects é Preciso um Ajuste de 10px.
+	*/
+	.TamanhoLetra{
+		text-indent: 20px;
+		width: 50px;
+	}
+	
+	.TamanhoMIN{
+		text-indent: 5px;
+		width: 118.75px !important;
+		padding: 7px 10px 7px 0px !important;
+		margin-right: 15px !important;
+	}
+	
+	.TamanhoPP{
+		text-indent: 5px;
+		width: 242.5px !important;
+		padding: 7px 10px 7px 0px !important;
+		margin-right: 15px !important;
+	}
+	
+	.TamanhoP{
+		text-indent: 5px;
+		width: 366.25px !important;
+		padding: 7px 10px 7px 0px !important;
+		margin-right: 15px !important;
+	}
+	
+	.TamanhoM{
+		text-indent: 5px;
+		width: 490px !important;
+		padding: 7px 10px 7px 0px !important;
+		margin-right: 15px !important;
+	}
+	
+	.TamanhoG{
+		text-indent: 5px;
+		width: 613.75px !important;
+		padding: 7px 10px 7px 0px !important;
+		margin-right: 15px !important;
+	}
+	
+	.TamanhoGG{
+		text-indent: 5px;
+		width: 737.5px !important;
+		padding: 7px 10px 7px 0px !important;
+		margin-right: 15px !important;
+	}
+	
+	.TamanhoXGG{
+		text-indent: 5px;
+		width: 861.75px !important;
+		padding: 7px 10px 7px 0px !important;
+		margin-right: 15px !important;
+	}
+	
+	.TamanhoMAX{
+		text-indent: 5px;
+		width: 985px !important;
+		padding: 7px 10px 7px 0px !important;
+		margin-right: 15px !important;
+	}
+	
+		
+	.TamanhoSelectMIN{
+		width: 128.75px !important;
+		margin-right: 15px !important;
+	}
+		
+	.TamanhoSelectMIN label{
+		width: 100% !important;
+		text-indent: 5px;
+	}	
+			
+	.TamanhoSelectPP{
+		width: 252.5px !important;
+		margin-right: 10px;
+	}
+		
+	.TamanhoSelectPP label{
+		width: 100% !important;
+		text-indent: 5px;
+	}
+	.TamanhoSelectP{
+		width: 376.25px !important;
+		margin-right: 10px;
+	}
+		
+	.TamanhoSelectP label{
+		width: 100% !important;
+		text-indent: 5px;
+	}
+	
+	.TamanhoSelectM{
+		width: 500px !important;
+		margin-right: 10px;
+	}
+		
+	.TamanhoSelectM label{
+		width: 100% !important;
+		text-indent: 5px;
+	}
+		
+	.TamanhoSelectG{
+		width: 623.75px !important;
+		margin-right: 10px;
+	}
+		
+	.TamanhoSelectG label{
+		width: 100% !important;
+		text-indent: 5px;
+	}
+	
+	.TamanhoSelectGG{
+		width: 747.5px !important;
+		margin-right: 10px;
+	}
+		
+	.TamanhoSelectGG label{
+		width: 100% !important;
+		text-indent: 5px;
+	}
+		
+	.TamanhoSelectXGG{		
+		width: 871.75px !important;
+		margin-right: 10px;
+	}
+		
+	.TamanhoSelectXGG label{
+		width: 100% !important;
+		text-indent: 5px;
+	}
+/* */
+	/* O tamanho da Imagem, por regra de negócio e de 255px*/
+	.TamanhoCampoImagem5X, .TamanhoCampoImagem5X img {
+		width: 51px;
+		height: auto;
+	}
+	
+	.TamanhoCampoImagem4X, .TamanhoCampoImagem4X img {
+		width: 63.75px;
+		height: auto;
+	}
+	
+	.TamanhoCampoImagem3X, .TamanhoCampoImagem3X img {
+		width: 85px;
+		height: auto;
+	}
+	
+	.TamanhoCampoImagem2X, .TamanhoCampoImagem2X img {
+		width: 127.5px;
+		height: auto;
+	}
+	
+	.TamanhoCampoImagemMAX, .TamanhoCampoImagemMAX img{
+		width: 255px;
+		height: auto;
+		
+	}
+	
+/* End Datatable */
+
+/* Class body */
+    .Container {
+        height: 100vh;
+        /* para ajustar o footer no final da pagina */
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .SectionAjuste{
+		/* Ajusta o Footer no Final da Página */
+			flex: 1;
+			padding: 10px;
+		/**/
+		font-size: 12px;
+		margin-bottom: 10px;
+	}
+	
+	.SectionAjuste label{
+		cursor: default;
+	}
+/* End Class body */
+
+/* Header */
+	.HeaderCabecalho {
+		display: block;
+	    background-color: var(--corPrincipal);
+	}
+	
+	.HeaderCabecalho h1{
+		float: right;
+		padding: 25px 10px 25px 0px;
+		display: block;
+		white-space: nowrap;
+
+		font-size: 18px;
+		color: var(--corLetra);
+	}
+	
+	.HeaderCabecalho img {
+		float: left;
+		
+	    max-width: 330px;
+	    max-height: 103px;
+	    width: 100%;
+	    min-height: auto;
+	}
+/* End Header */
+
+/* Footer */
+	.FooterCopyright{
+		padding: 30px 30px;
+/* 	    background-color: var(--corPrincipal); */
+	    color: var(--corLetra);
+	    font-size: 13px;
+	    text-align: center;
+	    font-weight: bold;
+	    font-family: sans-serif;
+	    cursor: poiter;
+	}
+/* End Footer */

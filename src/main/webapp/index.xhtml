@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+      
+<ui:composition template="/templates/_template.xhtml">	 
+   
+  <ui:define name="corpo">	
+		<div id="painellogin">
+			<h:form id="formlogin">
+				<div class="ObjetosColuna">
+				
+					<p:growl id="msglogin" showDetail="true" />
+					
+					<div class="ObjetosLinha">
+						<div>
+							<p:outputLabel value="Login" />
+							<p:inputText id="loginusu"  value="#{acessoBean.usuarios.login_usu}" class="TamanhoPP"/>
+						</div>
+					</div>
+					<div class="ObjetosLinha">
+						<div>						
+							<p:outputLabel value="Senha" />
+							<p:password id="senhausu" value="#{acessoBean.usuarios.senha_usu}" class="TamanhoPP"/>
+						</div>
+					</div>
+					
+					<br/>
+					
+					<div>
+						<p:commandButton onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" styleClass="BotaoPrimario" value="Login" action="#{acessoBean.login}" ajax="false"/>
+					</div>
+				</div>
+				
+			</h:form>		
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+      
+  <ui:composition template="/templates/_template.xhtml">	  
+      <ui:define name="menu">
+         <div class="menu">
+              <div id="menu">	
+                    <h:form>
+                        <p:panelMenu class="AjusteMenuPrincipal"  stateful="false">
+	                        <p:submenu label="Matrícula" expanded="true">
+	                                <p:menuitem onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" disabled="#{acessoBean.validausu(11)}" value="Consultar Inscrições" url="consultarInscricoesMatricula.xhtml" />                    
+	                        </p:submenu>
+	                        <p:submenu label="Opções" expanded="true">
+			                        <p:menuitem  onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" value="Sair" action="#{acessoBean.logout}" />
+			    			</p:submenu>
+                        </p:panelMenu>           
+                    </h:form>
+              </div>
+         </div>
+      </ui:define>
+  </ui:composition>
+</html>
+

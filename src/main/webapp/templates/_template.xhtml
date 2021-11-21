@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+  
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	 
+	<title>Prefeitura Municipal de Nilópolis</title>
+	
+	<link rel="shortcut icon" href="resources/imagens/logo.jpg"/>
+	
+   	<!--  A Ordem dos Links dos CSS e dos js Fazem a Diferença  -->
+    <h:outputStylesheet library="js"  name="respond.min.js" />	
+    <h:outputStylesheet library="js"  name="jquery-2.0.3.js" />	
+    <h:outputStylesheet library="js"  name="jquery-ui-1.10.3.custom.js" />	    
+    <h:outputStylesheet library="js"  name="jquery.mobile-1.3.2.min.js" />
+    
+    <h:outputStylesheet library="css" name="reset.css" />
+   	<h:outputStylesheet library="css" name="variaveis.css" />
+   	<h:outputStylesheet library="css" name="style.css"/> 
+    <h:outputStylesheet library="css" name="Tamanho1024px.css" />
+    <h:outputStylesheet library="css" name="Tamanho320px.css"/>	
+	
+	<script type="text/javascript" src="resources/js/funcoes.js"/>
+	<script type="text/javascript" src="resources/js/mascaras.js"/>
+	<ui:insert name="scripts_javascript" /> 
+	   	
+</h:head>
+   
+<body class="Container">
+    
+	<header class="HeaderCabecalho" id="cabecalho">
+    	<h:form>
+      		<p:commandLink  onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" action="#{managerBean.navegarmenuprincipal}" ajax="false">
+      			<h:graphicImage library="imagens" name="logo_texto.jpg"/>
+<!--       			<h:graphicImage library="imagens" name="WERNER.BMP"/> -->
+      		</p:commandLink>
+      		
+      		<h1>Cultura</h1>
+      	</h:form>
+    </header>
+    
+    <section class="SectionAjuste">
+	    <div>
+	    	<ui:insert name="menu"/>
+	    </div>  
+	    
+	    <div>
+	    	<ui:insert name="corposemformatacao"/>
+	    </div>   
+	       
+	   	<div id="conteudo">
+	   		<ui:insert name="corpo"/>
+	    </div>
+	    
+	    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" 
+	   				resizable="false" showHeader="false" style="height: 100px;">
+				<p:graphicImage style="height: 100px;" name="gears.gif" library="imagens"/>
+			</p:dialog>
+	    
+	</section>
+	
+    <footer class="FooterCopyright">
+    	<p>#{acessoBean.usuariologado()}</p>
+    	<p>#{acessoBean.banco()}</p>
+<!--     	<p>© 2021 Prefeitura Municipal de Nilópolis. Todos os Direitos Reservados - <p:outputLabel value="#{manager.acessoBean.usuariologado()}" style="color: rgba(255, 0, 0, 0.5);"/></p> -->
+<!--     	<p>Rua Pedro Álvares Cabral, 305 - Centro - Nilópolis</p> -->
+<!-- 		<p>Tel: (21) 2791-7371</p> -->
+<!-- 		<p>CNPJ - 29.138.286/0001-58</p>  -->
+    </footer>
+       
+</body>
+</html>

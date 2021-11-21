@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+<ui:composition template="/templates/_template.xhtml">  
+    <ui:define name="corpo">
+    
+    	<p:messages />  	
+			
+		<p:panel header="Preencha os dados abaixo para filtrar">
+		
+			<h:form id="formpesquisa">
+				<div class="ObjetosLinha">
+					<div class="ObjetosColuna">
+						<p:outputLabel value="Ano Letivo a ser Cursado"/>
+      					<p:inputText onfocus="StringMaiuscula(this, -1)" value="#{cult_matr_candidatoBean.candidato.ano_candidato}" styleClass="TamanhoPP" required="true" requiredMessage="por favor informe o ano"/>
+      				</div>
+					<div class="ObjetosColuna">
+						<p:outputLabel value="Segmento" />
+						<p:selectOneMenu value="#{cult_matr_candidatoBean.candidato.descricao_segmento1}" styleClass="TamanhoSelectMIN">
+							<f:selectItems value="#{cult_matr_candidatoBean.segmentolista}"/>				
+						</p:selectOneMenu>
+					</div>
+					<div class="ObjetosColuna">
+						<p:outputLabel value="Turno" />
+						<p:selectOneMenu id="comboanos" value="#{cult_matr_candidatoBean.candidato.turno_segmento1}" styleClass="TamanhoSelectM">
+							<f:selectItem itemValue="" itemLabel=""/>
+							<f:selectItem itemValue="M" itemLabel="MANHÃ"/>
+							<f:selectItem itemValue="T" itemLabel="TARDE"/>		
+							<f:selectItem itemValue="N" itemLabel="NOITE "/>										
+						</p:selectOneMenu>
+					</div>
+					<div class="ObjetosColuna">
+						<p:outputLabel value="Dias" />
+						<p:selectOneMenu value="#{cult_matr_candidatoBean.candidato.dia_segmento1}" styleClass="TamanhoSelectMIN">
+							<f:selectItem itemValue="" itemLabel=""/>
+							<f:selectItems value="#{cult_matr_candidatoBean.diaslista}"/>				
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="ObjetosLinha">
+					<div class="ObjetosColuna">
+						<p:outputLabel value="Nome do Candidato"/>
+      					<p:inputText onfocus="StringMaiuscula(this, -1)" value="#{cult_matr_candidatoBean.candidato.nome_candidato}" styleClass="TamanhoM" />
+      				</div>
+	      			<div class="ObjetosColuna">
+						<p:outputLabel value="cpf"/>
+      					<p:inputText onfocus="Cpf(this)" value="#{cult_matr_candidatoBean.candidato.cpf_candidato}" styleClass="TamanhoM" />
+      				</div>     				   		
+      			</div>
+      			<div class="ObjetosLinha">
+					<div class="ObjetosColuna">
+						<p:outputLabel value="Data de inscrição de"/>
+      					<p:inputText onfocus="Data(this)" value="#{cult_matr_candidatoBean.candidato.data_ini}" styleClass="TamanhoM" />
+      				</div>  
+      				<div class="ObjetosColuna">
+						<p:outputLabel value="até"/>
+      					<p:inputText onfocus="Data(this)" value="#{cult_matr_candidatoBean.candidato.data_fim}" styleClass="TamanhoM" />
+      				</div>	
+      			</div>
+      			
+      			<br/>
+         			
+		     	<p:commandButton styleClass="BotaoPrimario" action="#{cult_matr_candidatoBean.buscarcandidatos()}" value="Buscar Candidato" ajax="false" update=":formpesquisa :formlista :formcadastro"/>
+      			 			
+			</h:form>
+		</p:panel>
+		
+    	<h:form id="formlista">
+    		<p:panel rendered="#{cult_matr_candidatoBean.candidatolista.size() gt 0}">	
+    			<p:dataTable value="#{cult_matr_candidatoBean.candidatolista}" var="cand" id="dataTableDetalhe" rows="20"
+                 paginator="true" resizableColumns="true"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                 rowsPerPageTemplate="5,10,20,50">
+
+					<p:column headerText="Candidato">
+						<p:commandLink value="#{cand.nome_candidato}" action="#{cult_matr_candidatoBean.mostradialogocandidato()}" update=":formcadastro">
+							<f:setPropertyActionListener value="#{cand}" target="#{cult_matr_candidatoBean.candidato}" />
+							<p:ajax event="dialogReturn" update=":formcadastro" /> 
+						</p:commandLink>
+					</p:column>
+						
+					<p:column headerText="Nascimento">
+						<p:outputLabel value="#{cand.nascimento_candidato}"/>
+					</p:column>
+			
+					<p:column headerText="Responsável">
+						<p:outputLabel value="#{cand.nome_responsavel}"/>
+					</p:column>
+				
+					<p:column headerText="Segmento">
+						<p:outputLabel value="#{cand.descricao_segmento1}"/>
+					</p:column>
+					
+					<p:column headerText="Dias">
+						<p:outputLabel value="#{cand.dia_segmento1}"/>
+					</p:column>
+					
+					<p:column headerText="Turno">
+						<p:outputLabel value="#{cand.turno_segmento1}"/>
+					</p:column>
+				</p:dataTable>
+			</p:panel>	
+      	</h:form>
+   	  	
+   	  	<p:dialog widgetVar="Dialogo" modal="true" header="Consulta de Candidato">
+   	  		<h:form id="formcadastro">
+   	  		<p:tabView>
+		        <p:tab title="Dados Pessoais">
+		            <div class="ObjetosLinha">
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Nascimento" />
+							<p:inputText  onfocus="Data(this)" value="#{cult_matr_candidatoBean.candidato.nascimento_candidato}" class="TamanhoMIN" disabled="true"/>								
+						</div>
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Nome do Candidato"/>
+      						<p:inputText onfocus="StringMaiuscula(this, -1)" value="#{cult_matr_candidatoBean.candidato.nome_candidato}" styleClass="TamanhoM" disabled="true"/>
+      					</div>        					
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Bairro Candidato" />
+							<p:inputText onfocus="StringMaiuscula(this, -1)" value="#{cult_matr_candidatoBean.candidato.bairro_candidato}" styleClass="TamanhoP" disabled="true"/>
+						</div>
+					</div>
+					<div class="ObjetosLinha">  	
+      					<div class="ObjetosColuna">
+							<p:outputLabel value="Email"/>
+      						<p:inputText value="#{cult_matr_candidatoBean.candidato.email_candidato}" styleClass="TamanhoG" disabled="true"/>
+      					</div> 
+      					<div class="ObjetosColuna">
+							<p:outputLabel value="Cpf"/>
+      						<p:inputText value="#{cult_matr_candidatoBean.candidato.cpf_candidato}" styleClass="TamanhoG" disabled="true"/>
+      					</div> 
+      				</div>  	
+      				<div class="ObjetosLinha">  			  					
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Telefone ou celular"/>
+      						<p:inputText value="#{cult_matr_candidatoBean.candidato.celular_candidato}" styleClass="TamanhoP" disabled="true"/>
+      					</div> 
+      					
+      					<div class="ObjetosColuna">
+							<p:outputLabel value="Telefone ou celular"/>
+      						<p:inputText value="#{cult_matr_candidatoBean.candidato.fixo_candidato}" styleClass="TamanhoP" disabled="true"/>
+      					</div>
+      					
+      					<div class="ObjetosColuna">
+							<p:outputLabel value="Data Inscrição"/>
+      						<p:inputText value="#{cult_matr_candidatoBean.candidato.datainscricao_candidato}" styleClass="TamanhoP" disabled="true"/>
+      					</div>
+					</div>
+		        </p:tab>
+		        <p:tab title="Filiação">
+		            <div class="ObjetosLinha">    					
+						<div class="ObjetosColuna">
+      						<p:outputLabel value="Nome da Mãe"/>
+      						<p:inputText onfocus="StringMaiuscula(this, -1)" value="#{cult_matr_candidatoBean.candidato.mae_candidato}" styleClass="TamanhoM" disabled="true"/>
+      					</div>  
+      					<div class="ObjetosColuna">
+      						<p:outputLabel value="Nome do Pai"/>
+      						<p:inputText onfocus="StringMaiuscula(this, -1)" value="#{cult_matr_candidatoBean.candidato.pai_candidato}" styleClass="TamanhoM" disabled="true"/>
+      					</div> 
+      				</div>
+		        </p:tab>
+		        <p:tab title="Endereço">
+		            <div class="ObjetosLinha">
+						<div class="ObjetosColuna">
+	  						<p:outputLabel value="Logradouro"/>
+	            			<p:inputText onfocus="StringMaiuscula(this, -1)" value="#{cult_matr_candidatoBean.candidato.logradouro_endereco}" maxlength="30" styleClass="TextoCaixaAlta TamanhoG" disabled="true"/>
+      					</div>
+      				</div>
+     				<div class="ObjetosLinha">
+		      			<div class="ObjetosColuna">
+     						<p:outputLabel value="Número"/>
+		            		<p:inputText value="#{cult_matr_candidatoBean.candidato.numero_endereco}" maxlength="5" styleClass="TextoCaixaAlta TamanhoMIN" disabled="true"/>
+	      				</div>
+		      		
+	      				<div class="ObjetosColuna">
+	     					<p:outputLabel value="Compl"/>
+		            		<p:inputText value="#{cult_matr_candidatoBean.candidato.complemento_endereco}" maxlength="5" styleClass="TextoCaixaAlta TamanhoMIN" disabled="true"/>
+	      				</div>
+	      				<div class="ObjetosColuna">
+							<p:outputLabel value="Bairro" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.bairro_endereco}" styleClass="TamanhoM" disabled="true"/>							
+						</div>
+						<div class="ObjetosColuna">
+     						<p:outputLabel value="CEP"/>
+		        			<p:inputText onfocus="Cep(this)" value="#{cult_matr_candidatoBean.candidato.cep_endereco}" maxlength="11" styleClass="TextoCaixaAlta TamanhoMIN" disabled="true"/>
+						</div>					
+	      			</div>	
+		        </p:tab>
+		        <p:tab title="Responsável">
+		        	<div class="ObjetosLinha">    					
+						<div class="ObjetosColuna">
+      						<p:outputLabel value="Nome do Responsável"/>
+      						<p:inputText onfocus="StringMaiuscula(this, -1)" value="#{cult_matr_candidatoBean.candidato.nome_responsavel}" styleClass="TamanhoM" disabled="true"/>
+      					</div>  
+      					<div class="ObjetosColuna">
+							<p:outputLabel value="Tipo" />
+							<p:selectOneMenu value="#{cult_matr_candidatoBean.candidato.tipo_responsavel}" styleClass="TamanhoSelectM" disabled="true">
+								<f:selectItem itemValue="" itemLabel="" />
+								<f:selectItem itemValue="P" itemLabel="Pai" />
+								<f:selectItem itemValue="M" itemLabel="Mãe" /> 
+								<f:selectItem itemValue="A" itemLabel="Avô" />
+								<f:selectItem itemValue="V" itemLabel="Avó" />
+								<f:selectItem itemValue="O" itemLabel="Outro" />							
+							</p:selectOneMenu>
+						</div> 
+      				</div>
+      				<div class="ObjetosLinha">
+      					<div class="ObjetosColuna">
+      						<p:outputLabel value="Email Responsavel"/>
+      						<p:inputText value="#{cult_matr_candidatoBean.candidato.email_responsavel}" styleClass="TamanhoM" disabled="true"/>
+      					</div>
+      					<div class="ObjetosColuna">
+      						<p:outputLabel value="Telefone Responsavel"/>
+      						<p:inputText value="#{cult_matr_candidatoBean.candidato.celular_responsavel}" styleClass="TamanhoM" disabled="true"/>
+      					</div>
+      				</div>
+		        </p:tab>
+		        <p:tab title="Segmentos escolhidos">
+		        	<div class="ObjetosLinha">
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Descrição" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.descricao_segmento1}" maxlength="5" styleClass="TextoCaixaAlta TamanhoP" disabled="true"/>
+						</div>
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Dia" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.dia_segmento1}" maxlength="5" styleClass="TextoCaixaAlta TamanhoP" disabled="true"/>							
+						</div>
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Turno" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.turno_segmento1}" maxlength="5" styleClass="TextoCaixaAlta TamanhoP" disabled="true"/>							
+						</div>
+					</div>
+					<div class="ObjetosLinha">
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Descrição" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.descricao_segmento2}" maxlength="5" styleClass="TextoCaixaAlta TamanhoP" disabled="true"/>
+						</div>
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Dia" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.dia_segmento2}" maxlength="5" styleClass="TextoCaixaAlta TamanhoP" disabled="true"/>							
+						</div>
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Turno" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.turno_segmento2}" maxlength="5" styleClass="TextoCaixaAlta TamanhoP" disabled="true"/>							
+						</div>
+					</div>
+					<div class="ObjetosLinha">
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Descrição" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.descricao_segmento3}" maxlength="5" styleClass="TextoCaixaAlta TamanhoP" disabled="true"/>
+						</div>
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Dia" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.dia_segmento3}" maxlength="5" styleClass="TextoCaixaAlta TamanhoP" disabled="true"/>							
+						</div>
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Turno" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.turno_segmento3}" maxlength="5" styleClass="TextoCaixaAlta TamanhoP" disabled="true"/>							
+						</div>
+					</div>
+					<div class="ObjetosLinha">
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Descrição" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.descricao_segmento4}" maxlength="5" styleClass="TextoCaixaAlta TamanhoP" disabled="true"/>
+						</div>
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Dia" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.dia_segmento4}" maxlength="5" styleClass="TextoCaixaAlta TamanhoP" disabled="true"/>							
+						</div>
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Turno" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.turno_segmento4}" maxlength="5" styleClass="TextoCaixaAlta TamanhoP" disabled="true"/>							
+						</div>
+					</div>
+					<div class="ObjetosLinha">
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Descrição" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.descricao_segmento5}" maxlength="5" styleClass="TextoCaixaAlta TamanhoP" disabled="true"/>
+						</div>
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Dia" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.dia_segmento5}" maxlength="5" styleClass="TextoCaixaAlta TamanhoP" disabled="true"/>							
+						</div>
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Turno" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.turno_segmento5}" maxlength="5" styleClass="TextoCaixaAlta TamanhoP" disabled="true"/>							
+						</div>
+					</div>
+		        </p:tab>
+		    </p:tabView>
+		    	<p:commandButton styleClass="BotaoPrimario" action="#{cult_matr_candidatoBean.imprimirInscricao()}" value="Imprimir Inscrição" ajax="false" />      			
+			    <p:commandButton styleClass="BotaoSecundario" action="#{cult_matr_candidatoBean.reenviarInscricao()}" value="Reenviar Inscrição para Email" ajax="false" />
+   	  		</h:form>
+   	  	</p:dialog>	
+
+    </ui:define>
+  </ui:composition>   
+</html>
+
+

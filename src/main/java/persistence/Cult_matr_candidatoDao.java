@@ -392,7 +392,9 @@ public class Cult_matr_candidatoDao extends Dao {
 			statement = statement + " and STR_TO_DATE(a.datainscricao_candidato, '%d/%m/%Y') between STR_TO_DATE('" + cand.getData_ini() + "', '%d/%m/%Y') and STR_TO_DATE('" + cand.getData_fim() + "', '%d/%m/%Y')";					
 		} else if (!cand.getData_ini().equalsIgnoreCase("")) {
 			statement = statement + " and STR_TO_DATE(a.datainscricao_candidato, '%d/%m/%Y') = STR_TO_DATE('" + cand.getData_ini() + "', '%d/%m/%Y')";	
-		}		
+		}	
+		
+		System.out.println(statement);
 
 		stmt = con.prepareStatement(statement);
 

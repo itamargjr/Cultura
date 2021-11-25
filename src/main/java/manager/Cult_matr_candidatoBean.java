@@ -51,18 +51,30 @@ public class Cult_matr_candidatoBean {
 	
 	public Cult_matr_candidatoBean() {
 		
+		candidato = new Cult_matr_candidato();
+		segmento = new Cult_segmento();
+		responsavel = new Edu_matr_responsavel();
+		endereco = new End_endereco();
+		
+		segmentoselecionadolista = new ArrayList<Cult_segmento>();
+		candidatolista = new ArrayList<Cult_matr_candidato>();
+		
+		idade = 0;
+		
+		necespec = false;
+		
 		try {
 			diaslista = new Cult_matr_candidatoDao().findDias();
 
 			segmentolista = new Cult_segmentoDao().findSegmentos();
+			
+			System.out.println(segmentolista);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
 		}	
-		
-		limpaformulario();
 		
 	}
 	
@@ -144,21 +156,6 @@ public class Cult_matr_candidatoBean {
 
 	public void setSegmentolista(List<String> segmentolista) {
 		this.segmentolista = segmentolista;
-	}
-	
-	private void limpaformulario() {
-		candidato = new Cult_matr_candidato();
-		segmento = new Cult_segmento();
-		responsavel = new Edu_matr_responsavel();
-		endereco = new End_endereco();
-		
-		segmentoselecionadolista = new ArrayList<Cult_segmento>();
-		segmentolista = new ArrayList<String>();
-		candidatolista = new ArrayList<Cult_matr_candidato>();
-		
-		idade = 0;
-		
-		necespec = false;
 	}
 
 	public void calculaidade() {
@@ -268,8 +265,7 @@ public class Cult_matr_candidatoBean {
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Houve um erro na gravação do candidato", "")); // passa a mensagem
 				} else {
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Candidato gravado com sucesso", "")); // passa a mensagem
-					
-					limpaformulario();				
+		
 		
 				}
 

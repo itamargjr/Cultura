@@ -23,6 +23,7 @@
 					<div class="ObjetosColuna">
 						<p:outputLabel value="Segmento" />
 						<p:selectOneMenu value="#{cult_matr_candidatoBean.candidato.descricao_segmento1}" styleClass="TamanhoSelectMIN">
+							<f:selectItem itemValue="" itemLabel=""/>
 							<f:selectItems value="#{cult_matr_candidatoBean.segmentolista}"/>				
 						</p:selectOneMenu>
 					</div>
@@ -70,6 +71,13 @@
       			 			
 			</h:form>
 		</p:panel>
+		
+		<br/> 
+		
+		<h:form><h:commandLink value="Imprimir resultados" action="#{cult_matr_candidatoBean.imprimelistainscricoes()}" target="_blank" /></h:form>
+		
+		<br/>
+		<br/>
 		
     	<h:form id="formlista">
     		<p:panel rendered="#{cult_matr_candidatoBean.candidatolista.size() gt 0}">	

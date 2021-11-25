@@ -368,9 +368,9 @@ public class Cult_matr_candidatoDao extends Dao {
 			statement = statement + " and nome_candidato like '%" + cand.getNome_candidato() + "%'";
 		}
 		
-	//	if ((cand.getDescricao_segmento1()!=null)&&(!cand.getDescricao_segmento1().equalsIgnoreCase(""))) {
-	//		statement = statement + " and b.descricao_segmento = '" + cand.getDescricao_segmento1() + "'";
-	//	}
+		if ((cand.getDescricao_segmento1()!=null)&&(!cand.getDescricao_segmento1().equalsIgnoreCase(""))) {
+			statement = statement + " and b.descricao_segmento = '" + cand.getDescricao_segmento1() + "'";
+		}
 		
 		if ((cand.getDia_segmento1()!=null)&&(!cand.getDia_segmento1().equalsIgnoreCase(""))) {
 			statement = statement + " and b.dia_segmento = '" + cand.getDia_segmento1() + "'";
@@ -394,7 +394,7 @@ public class Cult_matr_candidatoDao extends Dao {
 			statement = statement + " and STR_TO_DATE(a.datainscricao_candidato, '%d/%m/%Y') = STR_TO_DATE('" + cand.getData_ini() + "', '%d/%m/%Y')";	
 		}	
 		
-		System.out.println(statement);
+		//System.out.println(statement);
 
 		stmt = con.prepareStatement(statement);
 
@@ -403,10 +403,11 @@ public class Cult_matr_candidatoDao extends Dao {
 		while (rs.next()) {
 			
 			String turno1 = rs.getString("turno_segmento1");
-			String turno2 = rs.getString("turno_segmento2");
-			String turno3 = rs.getString("turno_segmento3");
-			String turno4 = rs.getString("turno_segmento4");
-			String turno5 = rs.getString("turno_segmento5");
+			
+			String turno2 = "";//rs.getString("turno_segmento2");
+			String turno3 = "";//rs.getString("turno_segmento3");
+			String turno4 = "";//rs.getString("turno_segmento4");
+			String turno5 = "";//rs.getString("turno_segmento5");
 			
 			if (turno1==null) {
 				
@@ -418,45 +419,45 @@ public class Cult_matr_candidatoDao extends Dao {
 				turno1 = "NOITE";
 			}
 			
-			if (turno2==null) {
-				
-			} else if (turno2.equalsIgnoreCase("M")) {
-				turno2 = "MANHÃ";
-			} else if (turno2.equalsIgnoreCase("T")) {
-				turno2 = "TARDE";				
-			} else if (turno1.equalsIgnoreCase("N")) {
-				turno2 = "NOITE";
-			}
-			
-			if (turno3==null) {
-				
-			} else if (turno3.equalsIgnoreCase("M")) {
-				turno3 = "MANHÃ";
-			} else if (turno3.equalsIgnoreCase("T")) {
-				turno3 = "TARDE";				
-			} else if (turno3.equalsIgnoreCase("N")) {
-				turno3 = "NOITE";
-			}
-			
-			if (turno4==null) {
-				
-			} else if (turno4.equalsIgnoreCase("M")) {
-				turno4 = "MANHÃ";
-			} else if (turno4.equalsIgnoreCase("T")) {
-				turno4 = "TARDE";				
-			} else if (turno1.equalsIgnoreCase("N")) {
-				turno4 = "NOITE";
-			}
-			
-			if (turno5==null) {
-				
-			} else if (turno5.equalsIgnoreCase("M")) {
-				turno5 = "MANHÃ";
-			} else if (turno5.equalsIgnoreCase("T")) {
-				turno5 = "TARDE";				
-			} else if (turno5.equalsIgnoreCase("N")) {
-				turno5 = "NOITE";
-			}			
+//			if (turno2==null) {
+//				
+//			} else if (turno2.equalsIgnoreCase("M")) {
+//				turno2 = "MANHÃ";
+//			} else if (turno2.equalsIgnoreCase("T")) {
+//				turno2 = "TARDE";				
+//			} else if (turno1.equalsIgnoreCase("N")) {
+//				turno2 = "NOITE";
+//			}
+//			
+//			if (turno3==null) {
+//				
+//			} else if (turno3.equalsIgnoreCase("M")) {
+//				turno3 = "MANHÃ";
+//			} else if (turno3.equalsIgnoreCase("T")) {
+//				turno3 = "TARDE";				
+//			} else if (turno3.equalsIgnoreCase("N")) {
+//				turno3 = "NOITE";
+//			}
+//			
+//			if (turno4==null) {
+//				
+//			} else if (turno4.equalsIgnoreCase("M")) {
+//				turno4 = "MANHÃ";
+//			} else if (turno4.equalsIgnoreCase("T")) {
+//				turno4 = "TARDE";				
+//			} else if (turno1.equalsIgnoreCase("N")) {
+//				turno4 = "NOITE";
+//			}
+//			
+//			if (turno5==null) {
+//				
+//			} else if (turno5.equalsIgnoreCase("M")) {
+//				turno5 = "MANHÃ";
+//			} else if (turno5.equalsIgnoreCase("T")) {
+//				turno5 = "TARDE";				
+//			} else if (turno5.equalsIgnoreCase("N")) {
+//				turno5 = "NOITE";
+//			}			
 			
 			Cult_matr_candidato c = new Cult_matr_candidato(rs.getInt("id_candidato"),
 					rs.getInt("id_responsavel"),

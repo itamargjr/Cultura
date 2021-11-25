@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:composition template="/templates/_template.xhtml">
+		<ui:define name="corpo">
+			<center>
+			<p:dataTable value="#{cult_matr_candidatoBean.candidatolista}" var="cand" id="dataTableDetalhe" style="width:100%;">
+
+				<p:column headerText="Ano" style="width:6%;">
+					<p:outputLabel value="#{cand.ano_candidato}"/>
+				</p:column>
+				
+				<p:column headerText="Candidato" style="width:14%;" sortBy="#{cand.nome_candidato}">
+					<p:outputLabel value="#{cand.nome_candidato}"/>
+				</p:column>
+					
+				<p:column headerText="Nascimento" style="width:9%;" sortBy="#{cand.nascimento_candidato}">
+					<p:outputLabel value="#{cand.nascimento_candidato}"/>
+				</p:column>
+				
+				<p:column headerText="Segmento" style="width:9%;" sortBy="#{cand.descricao_segmento1}">
+					<p:outputLabel value="#{cand.descricao_segmento1}"/>
+				</p:column>
+					
+				<p:column headerText="Telefone" style="width:14%;">
+					<p:outputLabel value="#{cand.celular_candidato}"/>
+				</p:column>
+				
+				<p:column headerText="Responsável" style="width:6%;">
+					<p:outputLabel value="#{cand.nome_responsavel}"/>
+				</p:column>
+					
+				<p:column headerText="Telefone Responsavel" style="width:14%;">
+					<p:outputLabel value="#{cand.celular_responsavel}"/>
+				</p:column>				
+				
+				<p:column headerText="Bairro" style="width:3%;" sortBy="#{cand.bairro_candidato}">
+					<p:outputLabel value="#{cand.bairro_candidato}"/>
+				</p:column>
+
+			</p:dataTable>
+			</center>
+		</ui:define>
+	</ui:composition>
+
+</html>

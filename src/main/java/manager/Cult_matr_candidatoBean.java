@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -68,7 +69,7 @@ public class Cult_matr_candidatoBean {
 
 			segmentolista = new Cult_segmentoDao().findSegmentos();
 			
-			System.out.println(segmentolista);
+			//System.out.println(segmentolista);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,6 +77,22 @@ public class Cult_matr_candidatoBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
 		}	
 		
+	}
+	
+	@PostConstruct
+	public void init() {
+		carregalistadasession();
+		
+		limpalistadasession();		
+	}
+	
+	@SuppressWarnings("unchecked") // isso é necessário para o eclipse não colocar warning na atribuição abaixo porque não entende que o objeto retornado é realmente uma lista
+	public void carregalistadasession() {					
+		candidatolista = (List<Cult_matr_candidato>) new PaginasBean().GetPropriedadeSessionScope("candidatolista");
+	}
+	
+	public void limpalistadasession() {					
+		new PaginasBean().RemovePropriedadeSessionScope("candidatolista");
 	}
 	
 	public List<String> getDiaslista() {
@@ -300,6 +317,8 @@ public class Cult_matr_candidatoBean {
 		try {
 			candidatolista = new Cult_matr_candidatoDao().buscarCandidatos(candidato);
 			
+			new PaginasBean().SetPropriedadeSessionScope("candidatolista", candidatolista);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			
@@ -479,5 +498,10 @@ public class Cult_matr_candidatoBean {
 	public void mostradialogocandidato() {
 
 		PrimeFaces.current().executeScript("PF('Dialogo').show();");
+	}
+	
+	public String imprimelistainscricoes() {
+		
+		return "consultarInscricoesMatriculaRel.xhtml?faces-redirect=true";	
 	}
 }

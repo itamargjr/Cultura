@@ -368,12 +368,12 @@ public class Cult_matr_candidatoDao extends Dao {
 			statement = statement + " and nome_candidato like '%" + cand.getNome_candidato() + "%'";
 		}
 		
-		if ((cand.getDescricao_segmento1()!=null)&&(!cand.getDescricao_segmento1().equalsIgnoreCase(""))) {
-			statement = statement + " and descricao_segmento1 = '" + cand.getDescricao_segmento1() + "'";
-		}
+	//	if ((cand.getDescricao_segmento1()!=null)&&(!cand.getDescricao_segmento1().equalsIgnoreCase(""))) {
+	//		statement = statement + " and b.descricao_segmento = '" + cand.getDescricao_segmento1() + "'";
+	//	}
 		
 		if ((cand.getDia_segmento1()!=null)&&(!cand.getDia_segmento1().equalsIgnoreCase(""))) {
-			statement = statement + " and dia_segmento1 = '" + cand.getDia_segmento1() + "'";
+			statement = statement + " and b.dia_segmento = '" + cand.getDia_segmento1() + "'";
 		}
 		
 		if ((cand.getCpf_candidato()!=null)&&(!cand.getCpf_candidato().equalsIgnoreCase(""))) {
@@ -381,7 +381,7 @@ public class Cult_matr_candidatoDao extends Dao {
 		}
 		
 		if ((cand.getTurno_segmento1()!=null)&&(!cand.getTurno_segmento1().equalsIgnoreCase(""))) {
-			statement = statement + " and turno_segmento1 = '" + cand.getTurno_segmento1() + "'";
+			statement = statement + " and b.turno_segmento = '" + cand.getTurno_segmento1() + "'";
 		}
 		
 		if ((cand.getAno_candidato()!=null)&&(cand.getAno_candidato()!=0)) {

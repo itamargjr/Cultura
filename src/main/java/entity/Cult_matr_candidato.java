@@ -48,6 +48,12 @@ public class Cult_matr_candidato {
 	private Integer id_segmento5; // primeira opção
 	private Integer id_segmento;  // Opção na qual foi selecionado
 	
+	private String descricao_segmento;
+	private String dia_segmento;	
+	private String turno_segmento;	
+	private Integer idademin_segmento;	
+	private Integer idademax_segmento;	
+	
 	private String descricao_segmento1;
 	private String dia_segmento1;	
 	private String turno_segmento1;	
@@ -89,11 +95,12 @@ public class Cult_matr_candidato {
 			String numero_endereco, String complemento_endereco, String codigo_municipio, String bairro_endereco,
 			String tipo_candidato, String necespec_candidato, String cid_candidato, String descricao_cid10,
 			Integer id_segmento1, Integer id_segmento2, Integer id_segmento3, Integer id_segmento4,
-			Integer id_segmento5, Integer id_segmento, String descricao_segmento1, String dia_segmento1,
-			String turno_segmento1, String descricao_segmento2, String dia_segmento2, String turno_segmento2,
-			String descricao_segmento3, String dia_segmento3, String turno_segmento3, String descricao_segmento4,
-			String dia_segmento4, String turno_segmento4, String descricao_segmento5, String dia_segmento5,
-			String turno_segmento5, String cpf_candidato, String datainscricao_candidato) {
+			Integer id_segmento5, Integer id_segmento, String descricao_segmento, String dia_segmento,
+			String turno_segmento, Integer idademin_segmento, Integer idademax_segmento, String descricao_segmento1,
+			String dia_segmento1, String turno_segmento1, String descricao_segmento2, String dia_segmento2,
+			String turno_segmento2, String descricao_segmento3, String dia_segmento3, String turno_segmento3,
+			String descricao_segmento4, String dia_segmento4, String turno_segmento4, String descricao_segmento5,
+			String dia_segmento5, String turno_segmento5, String cpf_candidato, String datainscricao_candidato) {
 		super();
 		this.id_candidato = id_candidato;
 		this.id_responsavel = id_responsavel;
@@ -135,6 +142,11 @@ public class Cult_matr_candidato {
 		this.id_segmento4 = id_segmento4;
 		this.id_segmento5 = id_segmento5;
 		this.id_segmento = id_segmento;
+		this.descricao_segmento = descricao_segmento;
+		this.dia_segmento = dia_segmento;
+		this.turno_segmento = turno_segmento;
+		this.idademin_segmento = idademin_segmento;
+		this.idademax_segmento = idademax_segmento;
 		this.descricao_segmento1 = descricao_segmento1;
 		this.dia_segmento1 = dia_segmento1;
 		this.turno_segmento1 = turno_segmento1;
@@ -152,6 +164,46 @@ public class Cult_matr_candidato {
 		this.turno_segmento5 = turno_segmento5;
 		this.cpf_candidato = cpf_candidato;
 		this.datainscricao_candidato = datainscricao_candidato;
+	}
+
+	public String getDescricao_segmento() {
+		return descricao_segmento;
+	}
+
+	public void setDescricao_segmento(String descricao_segmento) {
+		this.descricao_segmento = descricao_segmento;
+	}
+
+	public String getDia_segmento() {
+		return dia_segmento;
+	}
+
+	public void setDia_segmento(String dia_segmento) {
+		this.dia_segmento = dia_segmento;
+	}
+
+	public String getTurno_segmento() {
+		return turno_segmento;
+	}
+
+	public void setTurno_segmento(String turno_segmento) {
+		this.turno_segmento = turno_segmento;
+	}
+
+	public Integer getIdademin_segmento() {
+		return idademin_segmento;
+	}
+
+	public void setIdademin_segmento(Integer idademin_segmento) {
+		this.idademin_segmento = idademin_segmento;
+	}
+
+	public Integer getIdademax_segmento() {
+		return idademax_segmento;
+	}
+
+	public void setIdademax_segmento(Integer idademax_segmento) {
+		this.idademax_segmento = idademax_segmento;
 	}
 
 	public String getData_ini() {
@@ -645,14 +697,17 @@ public class Cult_matr_candidato {
 				+ ", necespec_candidato=" + necespec_candidato + ", cid_candidato=" + cid_candidato
 				+ ", descricao_cid10=" + descricao_cid10 + ", id_segmento1=" + id_segmento1 + ", id_segmento2="
 				+ id_segmento2 + ", id_segmento3=" + id_segmento3 + ", id_segmento4=" + id_segmento4 + ", id_segmento5="
-				+ id_segmento5 + ", id_segmento=" + id_segmento + ", descricao_segmento1=" + descricao_segmento1
-				+ ", dia_segmento1=" + dia_segmento1 + ", turno_segmento1=" + turno_segmento1 + ", descricao_segmento2="
-				+ descricao_segmento2 + ", dia_segmento2=" + dia_segmento2 + ", turno_segmento2=" + turno_segmento2
-				+ ", descricao_segmento3=" + descricao_segmento3 + ", dia_segmento3=" + dia_segmento3
-				+ ", turno_segmento3=" + turno_segmento3 + ", descricao_segmento4=" + descricao_segmento4
-				+ ", dia_segmento4=" + dia_segmento4 + ", turno_segmento4=" + turno_segmento4 + ", descricao_segmento5="
-				+ descricao_segmento5 + ", dia_segmento5=" + dia_segmento5 + ", turno_segmento5=" + turno_segmento5
-				+ ", cpf_candidato=" + cpf_candidato + ", datainscricao_candidato=" + datainscricao_candidato
-				+ ", data_ini=" + data_ini + ", data_fim=" + data_fim + "]";
-	} 
+				+ id_segmento5 + ", id_segmento=" + id_segmento + ", descricao_segmento=" + descricao_segmento
+				+ ", dia_segmento=" + dia_segmento + ", turno_segmento=" + turno_segmento + ", idademin_segmento="
+				+ idademin_segmento + ", idademax_segmento=" + idademax_segmento + ", descricao_segmento1="
+				+ descricao_segmento1 + ", dia_segmento1=" + dia_segmento1 + ", turno_segmento1=" + turno_segmento1
+				+ ", descricao_segmento2=" + descricao_segmento2 + ", dia_segmento2=" + dia_segmento2
+				+ ", turno_segmento2=" + turno_segmento2 + ", descricao_segmento3=" + descricao_segmento3
+				+ ", dia_segmento3=" + dia_segmento3 + ", turno_segmento3=" + turno_segmento3 + ", descricao_segmento4="
+				+ descricao_segmento4 + ", dia_segmento4=" + dia_segmento4 + ", turno_segmento4=" + turno_segmento4
+				+ ", descricao_segmento5=" + descricao_segmento5 + ", dia_segmento5=" + dia_segmento5
+				+ ", turno_segmento5=" + turno_segmento5 + ", cpf_candidato=" + cpf_candidato
+				+ ", datainscricao_candidato=" + datainscricao_candidato + ", data_ini=" + data_ini + ", data_fim="
+				+ data_fim + "]";
+	}
 }

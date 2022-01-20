@@ -175,6 +175,30 @@ public class DSReportCandidato implements JRDataSource {
 			return new BigDecimal(registro.getId_segmento());
 		}  
 		
+		if(field.getName().equalsIgnoreCase("descricao_segmento")){			
+			if ((registro.getDescricao_segmento()==null)||(registro.getDescricao_segmento().equalsIgnoreCase(""))) {
+				return "L. ESPERA";
+			} else {
+				return "CLASSIFICADO";
+			}					
+		}
+		if(field.getName().equalsIgnoreCase("dia_segmento")){
+			if ((registro.getDia_segmento()==null)||(registro.getDia_segmento().equalsIgnoreCase(""))) {
+				return "";
+			} else {
+				return registro.getDia_segmento();
+			}
+		}
+		if(field.getName().equalsIgnoreCase("turno_segmento")){
+			return registro.getTurno_segmento();
+		}
+		if(field.getName().equalsIgnoreCase("idademin_segmento")){
+			return registro.getIdademin_segmento();
+		}  	
+		if(field.getName().equalsIgnoreCase("idademax_segmento")){
+			return registro.getIdademax_segmento();
+		}  	
+		
 		if(field.getName().equalsIgnoreCase("descricao_segmento1")){
 			return registro.getDescricao_segmento1();
 		}

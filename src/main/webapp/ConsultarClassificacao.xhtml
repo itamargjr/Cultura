@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+<ui:composition template="/templates/_template.xhtml">  
+    <ui:define name="corpo">
+    
+    	<p:messages />  	
+			
+		<p:panel header="Preencha os dados abaixo para filtrar">
+		
+			<h:form id="formpesquisa">
+				<div class="ObjetosLinha">
+					<div class="ObjetosColuna">
+						<p:outputLabel value="Segmento" /> 
+						<p:selectOneMenu value="#{cult_matr_candidatoBean.candidato.id_segmento}" styleClass="TamanhoSelectMIN">
+							<f:selectItem itemValue="" itemLabel=""/>
+							<f:selectItems value="#{cult_matr_candidatoBean.segmentoslista}" var="seg" itemValue="#{seg.id_segmento}" itemLabel="#{seg.descricao_segmento} #{seg.dia_segmento} de #{seg.idademin_segmento} a #{seg.idademax_segmento} anos Turno #{seg.turno_segmento}" /> 			
+						</p:selectOneMenu>
+					</div>
+				</div>
+      			
+      			<br/>
+         			
+		     	<p:commandButton styleClass="BotaoPrimario" 
+		     	                 action="#{cult_matr_candidatoBean.buscarcandidatosclass()}" 
+		     	                 value="Buscar Candidato" ajax="false" 
+		     	                 update=":formpesquisa :formlista :formcadastro" 
+		     	                 onclick="PF('statusDialog').show()" 
+		     	                 onsuccess="PF('statusDialog').hide()" />
+      			 			
+			</h:form>
+		</p:panel>
+		
+		<br/>
+		
+		<h:form id="formimprimirclass"><h:commandLink value="Imprimir resultados" 
+		                       action="#{cult_matr_candidatoBean.imprimeclassificacao()}" 
+		                       target="_blank" /></h:form>
+		
+		<br/>
+		<br/>
+		
+    	<h:form id="formlista">   	    		
+    	
+    		<p:panel rendered="#{cult_matr_candidatoBean.candidatolista.size() gt 0}">	
+    		
+    			<p:panelGrid columns="6">
+						<p:outputLabel value="Ano"/>
+						<p:outputLabel value="Segmento"/>
+						<p:outputLabel value="Idade inicial"/>
+						<p:outputLabel value="Idade Final"/>
+						<p:outputLabel value="Dias"/>
+						<p:outputLabel value="Turno"/>
+						
+      					<p:outputLabel value="#{cult_matr_candidatoBean.candidato.ano_candidato}"/>						
+      					<p:outputLabel value="#{cult_matr_candidatoBean.candidato.descricao_segmento}"/>						
+      					<p:outputLabel value="#{cult_matr_candidatoBean.candidato.idademin_segmento}" />						
+      					<p:outputLabel value="#{cult_matr_candidatoBean.candidato.idademax_segmento}"/>						
+      					<p:outputLabel value="#{cult_matr_candidatoBean.candidato.dia_segmento}"/>
+      					<p:outputLabel value="#{cult_matr_candidatoBean.candidato.turno_segmento}"/>
+
+      			</p:panelGrid>
+      			
+      			<br/>
+				<br/>
+
+    			<p:dataTable value="#{cult_matr_candidatoBean.candidatolista}" var="cand" id="dataTableDetalhe"  
+                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records">
+
+					<p:column headerText="Candidato">
+						<p:commandLink value="#{cand.nome_candidato}" action="#{cult_matr_candidatoBean.mostradialogocandidato()}" update=":formcadastro">
+							<f:setPropertyActionListener value="#{cand}" target="#{cult_matr_candidatoBean.candidato}" />
+							<p:ajax event="dialogReturn" update=":formcadastro" /> 
+						</p:commandLink>
+					</p:column>
+						
+					<p:column headerText="Nascimento">
+						<p:outputLabel value="#{cand.nascimento_candidato}"/>
+					</p:column>
+					
+					<p:column headerText="Telefone ou celular">
+   						<p:outputLabel value="#{cand.celular_candidato}" />
+   					</p:column> 
+			
+					<p:column headerText="Email">
+						<p:outputLabel value="#{cand.email_candidato}"/>
+					</p:column>
+					
+					<p:column headerText="Status" >
+						<p:outputLabel value="#{cand.id_segmento eq 0 ? 'LISTA DE ESPERA' : 'SELECIONADO'}"/>
+					</p:column>
+				</p:dataTable>
+			</p:panel>	
+      	</h:form>
+   	  	
+   	  	<p:dialog widgetVar="Dialogo" modal="true" header="Consulta de Candidato">
+   	  		<h:form id="formcadastro">
+   	  		<p:tabView>
+		        <p:tab title="Dados Pessoais">
+		            <div class="ObjetosLinha">
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Nascimento" />
+							<p:inputText  onfocus="Data(this)" value="#{cult_matr_candidatoBean.candidato.nascimento_candidato}" class="TamanhoMIN" disabled="true"/>								
+						</div>
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Nome do Candidato"/>
+      						<p:inputText onfocus="StringMaiuscula(this, -1)" value="#{cult_matr_candidatoBean.candidato.nome_candidato}" styleClass="TamanhoM" disabled="true"/>
+      					</div>        					
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Bairro Candidato" />
+							<p:inputText onfocus="StringMaiuscula(this, -1)" value="#{cult_matr_candidatoBean.candidato.bairro_candidato}" styleClass="TamanhoP" disabled="true"/>
+						</div>
+					</div>
+					<div class="ObjetosLinha">  	
+      					<div class="ObjetosColuna">
+							<p:outputLabel value="Email"/>
+      						<p:inputText value="#{cult_matr_candidatoBean.candidato.email_candidato}" styleClass="TamanhoG" disabled="true"/>
+      					</div> 
+      					<div class="ObjetosColuna">
+							<p:outputLabel value="Cpf"/>
+      						<p:inputText value="#{cult_matr_candidatoBean.candidato.cpf_candidato}" styleClass="TamanhoG" disabled="true"/>
+      					</div> 
+      				</div>  	
+      				<div class="ObjetosLinha">  			  					
+						<div class="ObjetosColuna">
+							<p:outputLabel value="Telefone ou celular"/>
+      						<p:inputText value="#{cult_matr_candidatoBean.candidato.celular_candidato}" styleClass="TamanhoP" disabled="true"/>
+      					</div> 
+      					
+      					<div class="ObjetosColuna">
+							<p:outputLabel value="Telefone ou celular"/>
+      						<p:inputText value="#{cult_matr_candidatoBean.candidato.fixo_candidato}" styleClass="TamanhoP" disabled="true"/>
+      					</div>
+      					
+      					<div class="ObjetosColuna">
+							<p:outputLabel value="Data Inscrição"/>
+      						<p:inputText value="#{cult_matr_candidatoBean.candidato.datainscricao_candidato}" styleClass="TamanhoP" disabled="true"/>
+      					</div>
+					</div>
+		        </p:tab>
+		        <p:tab title="Filiação">
+		            <div class="ObjetosLinha">    					
+						<div class="ObjetosColuna">
+      						<p:outputLabel value="Nome da Mãe"/>
+      						<p:inputText onfocus="StringMaiuscula(this, -1)" value="#{cult_matr_candidatoBean.candidato.mae_candidato}" styleClass="TamanhoM" disabled="true"/>
+      					</div>  
+      					<div class="ObjetosColuna">
+      						<p:outputLabel value="Nome do Pai"/>
+      						<p:inputText onfocus="StringMaiuscula(this, -1)" value="#{cult_matr_candidatoBean.candidato.pai_candidato}" styleClass="TamanhoM" disabled="true"/>
+      					</div> 
+      				</div>
+		        </p:tab>
+		        <p:tab title="Necessidade Especial" rendered="#{cult_matr_candidatoBean.candidato.necespec_candidato eq 'S'}">
+		            <div class="ObjetosLinha">    					
+      					<div class="ObjetosColuna">
+      						<p:outputLabel value="Necessidade Especial"/>
+      						<p:inputText onfocus="StringMaiuscula(this, -1)" value="#{cult_matr_candidatoBean.candidato.cid_candidato}" styleClass="TamanhoM" disabled="true"/>
+      					</div> 
+      				</div>
+		        </p:tab>
+		        <p:tab title="Endereço">
+		            <div class="ObjetosLinha">
+						<div class="ObjetosColuna">
+	  						<p:outputLabel value="Logradouro"/>
+	            			<p:inputText onfocus="StringMaiuscula(this, -1)" value="#{cult_matr_candidatoBean.candidato.logradouro_endereco}" maxlength="30" styleClass="TextoCaixaAlta TamanhoG" disabled="true"/>
+      					</div>
+      				</div>
+     				<div class="ObjetosLinha">
+		      			<div class="ObjetosColuna">
+     						<p:outputLabel value="Número"/>
+		            		<p:inputText value="#{cult_matr_candidatoBean.candidato.numero_endereco}" maxlength="5" styleClass="TextoCaixaAlta TamanhoMIN" disabled="true"/>
+	      				</div>
+		      		
+	      				<div class="ObjetosColuna">
+	     					<p:outputLabel value="Compl"/>
+		            		<p:inputText value="#{cult_matr_candidatoBean.candidato.complemento_endereco}" maxlength="5" styleClass="TextoCaixaAlta TamanhoMIN" disabled="true"/>
+	      				</div>
+	      				<div class="ObjetosColuna">
+							<p:outputLabel value="Bairro" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.bairro_endereco}" styleClass="TamanhoM" disabled="true"/>							
+						</div>
+						<div class="ObjetosColuna">
+     						<p:outputLabel value="CEP"/>
+		        			<p:inputText onfocus="Cep(this)" value="#{cult_matr_candidatoBean.candidato.cep_endereco}" maxlength="11" styleClass="TextoCaixaAlta TamanhoMIN" disabled="true"/>
+						</div>					
+	      			</div>	
+		        </p:tab>
+		        <p:tab title="Responsável">
+		        	<div class="ObjetosLinha">    					
+						<div class="ObjetosColuna">
+      						<p:outputLabel value="Nome do Responsável"/>
+      						<p:inputText onfocus="StringMaiuscula(this, -1)" value="#{cult_matr_candidatoBean.candidato.nome_responsavel}" styleClass="TamanhoM" disabled="true"/>
+      					</div>  
+      					<div class="ObjetosColuna">
+							<p:outputLabel value="Tipo" />
+							<p:selectOneMenu value="#{cult_matr_candidatoBean.candidato.tipo_responsavel}" styleClass="TamanhoSelectM" disabled="true">
+								<f:selectItem itemValue="" itemLabel="" />
+								<f:selectItem itemValue="P" itemLabel="Pai" />
+								<f:selectItem itemValue="M" itemLabel="Mãe" /> 
+								<f:selectItem itemValue="A" itemLabel="Avô" />
+								<f:selectItem itemValue="V" itemLabel="Avó" />
+								<f:selectItem itemValue="O" itemLabel="Outro" />							
+							</p:selectOneMenu>
+						</div> 
+      				</div>
+      				<div class="ObjetosLinha">
+      					<div class="ObjetosColuna">
+      						<p:outputLabel value="Email Responsavel"/>
+      						<p:inputText value="#{cult_matr_candidatoBean.candidato.email_responsavel}" styleClass="TamanhoM" disabled="true"/>
+      					</div>
+      					<div class="ObjetosColuna">
+      						<p:outputLabel value="Telefone Responsavel"/>
+      						<p:inputText value="#{cult_matr_candidatoBean.candidato.celular_responsavel}" styleClass="TamanhoM" disabled="true"/>
+      					</div>
+      				</div>
+		        </p:tab>
+		    </p:tabView>
+
+   	  		</h:form>
+   	  	</p:dialog>	
+
+    </ui:define>
+  </ui:composition>   
+</html>
+
+

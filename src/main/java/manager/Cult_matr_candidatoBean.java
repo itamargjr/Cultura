@@ -40,7 +40,7 @@ public class Cult_matr_candidatoBean {
 	public Cult_segmento segmento;
 	
 	public List<Cult_matr_candidato> candidatolista;
-	
+	public List<Cult_segmento> segmentoslista;
 	public List<Cult_segmento> segmentoselecionadolista;
 	
 	public List<String> diaslista;
@@ -69,6 +69,8 @@ public class Cult_matr_candidatoBean {
 
 			segmentolista = new Cult_segmentoDao().findSegmentos();
 			
+			segmentoslista = new Cult_segmentoDao().listar();
+			
 			//System.out.println(segmentolista);
 			
 		} catch (Exception e) {
@@ -95,6 +97,14 @@ public class Cult_matr_candidatoBean {
 		new PaginasBean().RemovePropriedadeSessionScope("candidatolista");
 	}
 	
+	public List<Cult_segmento> getSegmentoslista() {
+		return segmentoslista;
+	}
+
+	public void setSegmentoslista(List<Cult_segmento> segmentoslista) {
+		this.segmentoslista = segmentoslista;
+	}
+
 	public List<String> getDiaslista() {
 		return diaslista;
 	}
@@ -326,8 +336,90 @@ public class Cult_matr_candidatoBean {
 		}
 	}
 	
+	public void buscarcandidatosclass() {
+		try {
+
+			if ((candidato.getId_segmento() == null)||(candidato.getId_segmento() == 0)) {
+				throw new Exception("Dados inválidos, refaça a busca");
+			} else {
+
+				Cult_matr_candidatoDao cd = new Cult_matr_candidatoDao();
+				
+				candidatolista = cd.findCandidatoClass(candidato.getId_segmento());
+				
+				if (candidatolista.size()>0) {
+					candidato.setAno_candidato(candidatolista.get(0).getAno_candidato());
+					candidato.setAno_candidato(candidatolista.get(0).getAno_candidato());				
+  					candidato.setDescricao_segmento(candidatolista.get(0).getDescricao_segmento());				
+  					candidato.setIdademin_segmento(candidatolista.get(0).getIdademin_segmento());			
+  					candidato.setIdademax_segmento(candidatolista.get(0).getIdademax_segmento());				
+  					candidato.setDia_segmento(candidatolista.get(0).getDia_segmento());
+  					candidato.setTurno_segmento(candidatolista.get(0).getTurno_segmento());									
+				}
+				
+				new PaginasBean().SetPropriedadeSessionScope("candidatoreportlista", candidatolista);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), "")); // passa a mensagem
+		}
+	}
+	
 	public void imprimirInscricao(){
 		imprimeCandidato(candidato.getId_candidato());
+	}
+	
+	public String imprimeclassificacao(){
+		
+		if ((candidatolista.size()==0)) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nenhum candidato encontrado para enviar imprimir", "")); // passa a mensagem
+		} else {
+			FacesContext fc = FacesContext.getCurrentInstance();
+			
+			try{		
+				
+				DSReportCandidato ds = new DSReportCandidato(candidatolista);
+				
+				InputStream arquivo = FacesContext.getCurrentInstance()
+					.getExternalContext().getResourceAsStream("/classificacaocultura.jasper");	
+
+				byte[] pdf = JasperRunManager.runReportToPdf(arquivo, null, ds);
+					
+				HttpServletResponse res = (HttpServletResponse) FacesContext
+						.getCurrentInstance().getExternalContext().getResponse();
+					
+				res.setContentType("application/pdf");
+				
+				res.setContentLength(pdf.length);
+					
+				OutputStream out = res.getOutputStream();
+
+				out.write(pdf, 0, pdf.length);
+
+				out.flush();	
+				
+				out.close();
+				
+				FacesContext.getCurrentInstance().responseComplete();
+				
+				OutputStream fileout = new FileOutputStream("classificacao.pdf");	
+				
+				fileout.write(pdf, 0, pdf.length);
+
+				fileout.flush();	
+
+				fileout.close();	
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+				fc.addMessage("formimprimirclass", new FacesMessage("Erro ao enviar: " + e.getMessage()));	
+			}
+		}
+		
+		return null;
 	}
 	
 	public void reenviarInscricao() {

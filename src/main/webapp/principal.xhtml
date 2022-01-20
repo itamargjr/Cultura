@@ -13,7 +13,8 @@
                     <h:form>
                         <p:panelMenu class="AjusteMenuPrincipal"  stateful="false">
 	                        <p:submenu label="Matrícula" expanded="true">
-	                                <p:menuitem onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" disabled="#{acessoBean.validausu(11)}" value="Consultar Inscrições" url="consultarInscricoesMatricula.xhtml" />                    
+	                                <p:menuitem onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" disabled="#{acessoBean.validausu(11)}" value="Consultar Inscrições" url="consultarInscricoesMatricula.xhtml" />
+	                                <p:menuitem onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" disabled="#{acessoBean.validausu(11)}" value="Consultar Classificados" url="ConsultarClassificacao.xhtml" />                    
 	                        </p:submenu>
 	                        <p:submenu label="Opções" expanded="true">
 			                        <p:menuitem  onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" value="Sair" action="#{acessoBean.logout}" />
